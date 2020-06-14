@@ -17,7 +17,7 @@ namespace GradeBook.GradeBooks
 
       var averageGradeList = Students.Select(i => i.AverageGrade).ToList();
       averageGradeList.Add(averageGrade);
-      var averageGradeArray = averageGradeList.OrderBy(i => i).ToArray();
+      var averageGradeArray = averageGradeList.OrderByDescending(i => i).ToArray();
       var index = Array.IndexOf(averageGradeArray,averageGrade);
       var step = averageGradeArray.Length / 5;
 
