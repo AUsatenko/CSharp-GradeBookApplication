@@ -15,21 +15,18 @@ namespace GradeBook.GradeBooks
     {
       if(Students.Count < 5) throw new InvalidOperationException();
 
-      var averageGradeList = Students.Select(i => i.AverageGrade).ToList();
-      averageGradeList.Add(averageGrade);
-      var averageGradeArray = averageGradeList.OrderByDescending(i => i).ToArray();
-      var index = Array.IndexOf(averageGradeArray,averageGrade);
-      var step = averageGradeArray.Length / 5;
+      var grades = Students.Select(i => i.AverageGrade).OrderByDescending(j =>j).ToArray();
+      var threshold = (int)Math.Ceiling(Students.Count * 0.2);
 
-      if(index >=0 && index < step){
+      if(grades[threshold - 1] <=averageGrade){
         return 'A';
-      }else if(index <= step*2){
+      }else if(grades[threshold*2- 1] <=averageGrade){
         return 'B';
-      }else if(index <= step*3){
+      }else if(grades[threshold*3 - 1] <=averageGrade){
         return 'C';
-      }else if(index <= step*4){
+      }else if(grades[threshold*4 - 1] <=averageGrade){
         return 'D';
-      }else if(index <= step*5){
+      }else if(grades[threshold*5 - 1] <=averageGrade){
         return 'E';
       }
       return 'F';
